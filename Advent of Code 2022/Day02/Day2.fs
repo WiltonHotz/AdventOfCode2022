@@ -122,4 +122,4 @@ module Task02 =
         |> Array.sum
         |> string
 
-    let data = { Path = path; Solver = solve; Title = executingModule };
+    let data = { Path = path; Solver = solve; Title = executingModule }; 
