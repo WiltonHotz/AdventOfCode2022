@@ -14,9 +14,9 @@ type Shape =
 
 let scoreShape shape =
     match shape with
-    | Rock          -> 1
-    | Paper         -> 2
-    | Scissors      -> 3
+    | Rock                  -> 1
+    | Paper                 -> 2
+    | Scissors              -> 3
 
 type Outcome =
 | Win
@@ -25,21 +25,21 @@ type Outcome =
 
 let scoreOutcome outcome =
     match outcome with
-    | Win -> 6
-    | Draw -> 3
-    | Loss -> 0
+    | Win                   -> 6
+    | Draw                  -> 3
+    | Loss                  -> 0
 
 let playRound yourShape opponentShape =
     match yourShape, opponentShape with
-    | Rock, Scissors -> Win
-    | Rock, Paper -> Loss
-    | Rock, Rock -> Draw
-    | Paper, Rock -> Win
-    | Paper, Scissors -> Loss
-    | Paper, Paper -> Draw
-    | Scissors, Paper -> Win
-    | Scissors, Rock -> Loss
-    | Scissors, Scissors -> Draw
+    | Rock, Scissors        -> Win
+    | Rock, Paper           -> Loss
+    | Rock, Rock            -> Draw
+    | Paper, Rock           -> Win
+    | Paper, Scissors       -> Loss
+    | Paper, Paper          -> Draw
+    | Scissors, Paper       -> Win
+    | Scissors, Rock        -> Loss
+    | Scissors, Scissors    -> Draw
 
 let getRoundTotalScore shape outcome =
     let shapeScore = scoreShape shape
@@ -96,15 +96,15 @@ module Task02 =
 
     let getNeededShape opponentShape need =
         match opponentShape, need with
-        | Rock, ToWin -> Paper
-        | Rock, ToLose -> Scissors
-        | Rock, ToDraw -> Rock
-        | Paper, ToWin -> Scissors
-        | Paper, ToLose -> Rock
-        | Paper, ToDraw -> Paper
-        | Scissors, ToWin -> Rock
-        | Scissors, ToLose -> Paper
-        | Scissors, ToDraw -> Scissors
+        | Rock, ToWin       -> Paper
+        | Rock, ToLose      -> Scissors
+        | Rock, ToDraw      -> Rock
+        | Paper, ToWin      -> Scissors
+        | Paper, ToLose     -> Rock
+        | Paper, ToDraw     -> Paper
+        | Scissors, ToWin   -> Rock
+        | Scissors, ToLose  -> Paper
+        | Scissors, ToDraw  -> Scissors
 
     let getShapesFromRow (row: string) =
         let shapesAndNeed = row.Split(" ")
