@@ -10,12 +10,12 @@
     <Compile Include="TaskData.fs" />
     <Compile Include="Reader.fs" />
     <Compile Include="Common.fs" />
-    <None Include="Warmup\2021_Day1.csv" />
+    <None Include="Warmup\2021_Day01.csv" />
     <Compile Include="Warmup\Warmup.fs" />
-    <None Include="Day01\Day1.csv" />
-    <Compile Include="Day01\Day1.fs" />
-    <Compile Include="Day02\Day2.fs" />
-    <None Include="Day02\Day2.csv" />
+    <None Include="Day01\Day01.csv" />
+    <Compile Include="Day01\Day01.fs" />
+    <Compile Include="Day02\Day02.fs" />
+    <None Include="Day02\Day02.csv" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

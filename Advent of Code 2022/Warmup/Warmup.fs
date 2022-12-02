@@ -10,7 +10,7 @@ module AoC2021 =
 
     module Day01 =
 
-        let path = Path.Combine(__SOURCE_DIRECTORY__, "2021_Day1.csv")
+        let path = Path.Combine(__SOURCE_DIRECTORY__, "2021_Day01.csv")
 
 
         module Task01 =

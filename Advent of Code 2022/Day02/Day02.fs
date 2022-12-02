@@ -5,7 +5,7 @@ open Common
 
 open System.IO
 
-let path = Path.Combine(__SOURCE_DIRECTORY__, "Day2.csv")
+let path = Path.Combine(__SOURCE_DIRECTORY__, "Day02.csv")
 
 type Shape =
 | Rock
@@ -122,4 +122,4 @@ module Task02 =
         |> Array.sum
         |> string
 
-    let data = { Path = path; Solver = solve; Title = executingModule }; 
+    let data = { Path = path; Solver = solve; Title = executingModule };

@@ -6,7 +6,7 @@ open Common
 open System.IO
 open System
 
-let path = Path.Combine(__SOURCE_DIRECTORY__, "Day1.csv")
+let path = Path.Combine(__SOURCE_DIRECTORY__, "Day01.csv")
 
 let getElves (input: string) = input.Split("\r\n\r\n")
 
