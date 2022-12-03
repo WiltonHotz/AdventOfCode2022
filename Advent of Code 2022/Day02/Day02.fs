@@ -59,7 +59,6 @@ let getShapesFromLetter letter =
 
 module Task01 =
 
-    let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
 
     let getShapesFromRow (row: string) =
         let shapes = row.Split(" ")
@@ -75,13 +74,12 @@ module Task01 =
         |> Array.sum
         |> string
 
+    let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
 
     let data = { Path = path; Solver = solve; Title = executingModule };
 
 
 module Task02 =
-
-    let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
 
     type Need =
     | ToWin
@@ -121,5 +119,7 @@ module Task02 =
         |> Array.map playRoundAndGetScore
         |> Array.sum
         |> string
+
+    let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
 
     let data = { Path = path; Solver = solve; Title = executingModule };

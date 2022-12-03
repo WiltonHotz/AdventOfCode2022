@@ -15,8 +15,6 @@ module AoC2021 =
 
         module Task01 =
 
-            let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
-
             let solve input = 
                 input 
                 |> toArray
@@ -26,12 +24,12 @@ module AoC2021 =
                 |> Array.length
                 |> string
 
+            let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
+
             let data = { Path = path; Solver = solve; Title = executingModule };
 
 
         module Task02 =
-
-            let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
 
             let solve input =
                 input
@@ -47,5 +45,7 @@ module AoC2021 =
                 |> Array.filter(fun (a,b) -> b > a) 
                 |> Array.length
                 |> string
+
+            let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
 
             let data = { Path = path; Solver = solve; Title = executingModule };

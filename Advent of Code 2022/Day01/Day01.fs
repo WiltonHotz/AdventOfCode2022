@@ -24,21 +24,18 @@ let getTotalCaloriesPerElf elves =
 
 module Task01 =
 
-    let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
-
     let solve input = 
         input
         |> getTotalCaloriesPerElf
         |> Seq.max
         |> string
 
+    let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
 
     let data = { Path = path; Solver = solve; Title = executingModule };
 
 
 module Task02 =
-
-    let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
 
     let solve input = 
         input 
@@ -47,5 +44,7 @@ module Task02 =
         |> Seq.take 3
         |> Seq.sum
         |> string
+
+    let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
 
     let data = { Path = path; Solver = solve; Title = executingModule };
