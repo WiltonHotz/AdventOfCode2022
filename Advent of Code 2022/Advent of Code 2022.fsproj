@@ -18,6 +18,8 @@
     <None Include="Day02\Day02.csv" />
     <Compile Include="Day03\Day03.fs" />
     <None Include="Day03\Day03.csv" />
+    <Compile Include="Day04\Day04.fs" />
+    <None Include="Day04\Day04.csv" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

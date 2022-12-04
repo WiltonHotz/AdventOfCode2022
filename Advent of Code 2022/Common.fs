@@ -12,3 +12,5 @@ let formatCaller (caller: string) =
 
 let toArray (input: string) = 
     input.Split "\r\n"
+
+let split (delim: string) (line: string) = line.Split delim
