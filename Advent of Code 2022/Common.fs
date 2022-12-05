@@ -1,6 +1,7 @@
 ﻿module Common
 
 open Microsoft.FSharp.Quotations.Patterns
+open System
 
 let getModuleType = function
 | PropertyGet (_, propertyInfo, _) -> propertyInfo.DeclaringType
@@ -14,3 +15,5 @@ let toArray (input: string) =
     input.Split "\r\n"
 
 let split (delim: string) (line: string) = line.Split delim
+
+let join (delim : string) (items : 'T seq) = String.Join(delim, items)

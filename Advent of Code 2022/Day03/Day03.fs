@@ -5,7 +5,7 @@ open Common
 
 open System.IO
 
-let path = Path.Combine(__SOURCE_DIRECTORY__, "Day03.csv")
+let path = Path.Combine(__SOURCE_DIRECTORY__, "input.csv")
 
 let prioritize (char: char) =
     match char |> int with

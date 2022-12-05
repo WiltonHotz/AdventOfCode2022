@@ -12,15 +12,20 @@
     <Compile Include="Common.fs" />
     <None Include="Warmup\2021_Day01.csv" />
     <Compile Include="Warmup\Warmup.fs" />
-    <None Include="Day01\Day01.csv" />
+    <None Include="Day01\input.csv" />
     <Compile Include="Day01\Day01.fs" />
+    <None Include="Day02\input.csv" />
     <Compile Include="Day02\Day02.fs" />
-    <None Include="Day02\Day02.csv" />
+    <None Include="Day03\input.csv" />
     <Compile Include="Day03\Day03.fs" />
-    <None Include="Day03\Day03.csv" />
+    <None Include="Day04\input.csv" />
     <Compile Include="Day04\Day04.fs" />
-    <None Include="Day04\Day04.csv" />
+    <Content Include="Day05\originalState.csv" />
+    <None Include="Day05\input.csv" />
+    <Compile Include="Day05\Day05.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
+
+  <ItemGroup />
 
 </Project>
