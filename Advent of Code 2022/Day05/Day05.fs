@@ -120,19 +120,6 @@ let setPileFromSource source pile cargo =
     | 9     -> { cargo with Pile9 = pile }
     | _     -> failwith "blup?"
 
-let applyCommandsToCargo cargo commands =
-    let rec loop currentcargo remainingCommands =
-        match remainingCommands with
-        | [] -> currentcargo
-        | head::tail -> 
-            let (count, source, destination) = head
-            let sourcePile = currentcargo |> getPileFromSource source
-            let destinationPile = currentcargo |> getPileFromSource destination
-            let newSource, newDestination = moveManyOneAtATime (sourcePile, destinationPile, count)
-            let updatedCargo = (currentcargo |> setPileFromSource source newSource) |> setPileFromSource destination newDestination
-            loop updatedCargo tail
-    loop cargo commands
-
 let getCargoResults (cargo: Cargo) =
     [|
     cargo.Pile1[cargo.Pile1.Length - 1]
