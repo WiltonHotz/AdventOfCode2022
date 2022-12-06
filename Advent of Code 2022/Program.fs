@@ -15,7 +15,8 @@ type Task =
 | AoC2022_4_2
 | AoC2022_5_1
 | AoC2022_5_2
-
+| AoC2022_6_1
+| AoC2022_6_2
 
 let from task applyTo =
     match task with
@@ -31,6 +32,8 @@ let from task applyTo =
     | AoC2022_4_2       -> Day04.Task02.data
     | AoC2022_5_1       -> Day05.Task01.data
     | AoC2022_5_2       -> Day05.Task02.data
+    | AoC2022_6_1       -> Day06.Task01.data
+    | AoC2022_6_2       -> Day06.Task02.data
     |> fun data -> applyTo data
 
 let solve task =
@@ -65,6 +68,8 @@ let main argv =
         AoC2022_4_2
         AoC2022_5_1
         AoC2022_5_2
+        AoC2022_6_1
+        AoC2022_6_2
     ]
 
     solveMany tasks

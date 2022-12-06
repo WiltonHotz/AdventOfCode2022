@@ -23,9 +23,9 @@
     <Content Include="Day05\originalState.csv" />
     <None Include="Day05\input.csv" />
     <Compile Include="Day05\Day05.fs" />
+    <Compile Include="Day06\Day06.fs" />
+    <None Include="Day06\input.csv" />
     <Compile Include="Program.fs" />
   </ItemGroup>
-
-  <ItemGroup />
 
 </Project>
