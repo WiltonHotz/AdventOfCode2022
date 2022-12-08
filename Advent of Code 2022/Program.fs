@@ -89,7 +89,7 @@ let main argv =
         AoC2022_7_1
         AoC2022_7_2
         AoC2022_8_1
-        //AoC2022_8_2
+        AoC2022_8_2
     ]
 
     solveMany tasks

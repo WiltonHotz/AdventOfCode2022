@@ -88,4 +88,11 @@ let (state: char [][]) = originalState
 let update state value =
    let (count, source, destination) = value
 
+Assign actions from a DU and then later match on actions
+https://github.com/ijrussell/AdventOfCode2022/blob/main/Code/Day07/code.fsx
+
+More regex matching, and everything here really
+https://github.com/jindraivanek/adventofcode2022/blob/master/day7.fsx
+
+
 *)

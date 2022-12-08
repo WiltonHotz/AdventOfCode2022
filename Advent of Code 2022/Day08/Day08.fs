@@ -4,17 +4,9 @@ open TaskData
 open Common
 
 open System.IO
-open System
 
 let path = Path.Combine(__SOURCE_DIRECTORY__, "input.csv")
 
-let test =
-    "30373" + "\r\n" +
-    "25512" + "\r\n" +
-    "65332" + "\r\n" +
-    "33549" + "\r\n" +
-    "35390"
-    
 type Position = {
     Value: int
     X: int
@@ -25,51 +17,45 @@ let createGrid (input: string[]) =
     input
     |> Array.map (fun s -> s.ToCharArray())
     |> Array.mapi (fun rowIndex row ->
-        row
-        |>
-        Array.mapi (fun colIndex value -> { Value = int (string value); X = colIndex; Y = rowIndex }))
+        row |> Array.mapi (fun colIndex value -> 
+            { Value = int (string value); X = colIndex; Y = rowIndex }))
 
 let gridMax grid =
     let last = grid |> (Array.map Array.last) |> Array.last
     (last.X, last.Y)
 
-
-let leftRightCheck position (grid: Position[][]) =
-    let left  = grid[position.Y] |> Array.take position.X
-    let right = grid[position.Y] |> Array.skip (position.X + 1)
+let edgePosition position grid = 
     let max = gridMax grid
-    if position.Y = 49 && position.X = 49
-    then printf ""
-    if position.X = 0 || position.Y = 0 || position.X = fst max || position.Y = snd max
-    then true
-    else position.Value > (left |> Array.max).Value || position.Value > (right |> Array.max).Value
-
-let visibleFromOutside position (grid: Position[][]) = 
-    grid |> leftRightCheck position ||
-    Array.transpose grid |> leftRightCheck position 
-    //||
-    //Array.transpose (Array.transpose grid) |> leftRightCheck position ||
-    //Array.transpose (Array.transpose (Array.transpose grid)) |> leftRightCheck position
-
-let iterate (grid: Position[][]) =
-    grid
-    |> Array.map (fun row ->
-        row 
-        |> Array.sumBy (fun position -> 
-            if grid |> visibleFromOutside position then 1 else 0))
+    position.X = 0 || position.Y = 0 || position.X = fst max || position.Y = snd max
 
 module Task01 =
+
+    let leftRightCheck position (grid: Position[][]) =
+        let left  = grid[position.Y] |> Array.take position.X
+        let right = grid[position.Y] |> Array.skip (position.X + 1)
+        if grid |> edgePosition position
+        then true
+        else position.Value > (left |> Array.max).Value || position.Value > (right |> Array.max).Value
+
+    let visibleFromOutside position (grid: Position[][]) = 
+        let transposed = (Array.transpose grid)
+        grid |> leftRightCheck position || transposed |> leftRightCheck { position with X = position.Y; Y = position.X }
+
+    let iterate (grid: Position[][]) =
+        grid
+        |> Array.map (fun row ->
+            row 
+            |> Array.map (fun position -> 
+                if grid |> visibleFromOutside position then 1 else 0))
 
     let solve input = 
         input
         |> toArray
         |> createGrid
         |> iterate
-        //|> Array.iter (printfn "%A")
-        |> Array.sum
+        |> Array.sumBy (Array.reduce (+))
         |> string
         
-
     let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
 
     let data = { Path = path; Solver = solve; Title = executingModule };
@@ -77,8 +63,40 @@ module Task01 =
 
 module Task02 =
 
+    let leftRightCheck position (grid: Position[][]) =
+        let left  = grid[position.Y] |> Array.take position.X
+        let right = grid[position.Y] |> Array.skip (position.X + 1)
+        if grid |> edgePosition position
+        then 0
+        else 
+            let leftUntilBlock = left |> Array.rev |> Array.takeWhile (fun tree -> position.Value > tree.Value) 
+            let leftLength = leftUntilBlock |> Array.length
+            let leftLastIsEdge = if leftLength = 0 then true else grid |> edgePosition (leftUntilBlock |> Array.last)
+
+            let rightUntilBlock = right |> Array.takeWhile (fun tree -> position.Value > tree.Value)
+            let rightLength = rightUntilBlock |> Array.length
+            let rightLastIsEdge = if rightLength = 0 then true else grid |> edgePosition (rightUntilBlock |> Array.last)
+            
+            ((leftLength + (if leftLastIsEdge then 0 else 1)) * (rightLength + (if rightLastIsEdge then 0 else 1)))
+
+    let visibleFromInside position (grid: Position[][]) = 
+        let transposed = (Array.transpose grid)
+        (grid |> leftRightCheck position) * (transposed |> leftRightCheck { position with X = position.Y; Y = position.X })
+
+    let iterate (grid: Position[][]) =
+        grid
+        |> Array.map (fun row ->
+            row 
+            |> Array.map (fun position -> grid |> visibleFromInside position))
+
     let solve input = 
         input
+        |> toArray
+        |> createGrid
+        |> iterate
+        |> Array.collect id
+        |> Array.max
+        |> string
 
     let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
 
