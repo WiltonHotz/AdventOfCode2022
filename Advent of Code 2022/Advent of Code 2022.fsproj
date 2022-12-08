@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Concepts to learn\ToLearn.fs" />
     <Compile Include="TaskData.fs" />
     <Compile Include="Reader.fs" />
     <Compile Include="Common.fs" />
@@ -23,8 +24,13 @@
     <Content Include="Day05\originalState.csv" />
     <None Include="Day05\input.csv" />
     <Compile Include="Day05\Day05.fs" />
+    <Compile Include="Day05\Day05_Attempt2.fs" />
     <Compile Include="Day06\Day06.fs" />
     <None Include="Day06\input.csv" />
+    <Compile Include="Day07\Day07.fs" />
+    <None Include="Day07\input.csv" />
+    <Compile Include="Day08\Day08.fs" />
+    <None Include="Day08\input.csv" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
