@@ -28,6 +28,7 @@ let edgePosition position grid =
     let max = gridMax grid
     position.X = 0 || position.Y = 0 || position.X = fst max || position.Y = snd max
 
+
 module Task01 =
 
     let leftRightCheck position (grid: Position[][]) =
@@ -69,13 +70,13 @@ module Task02 =
         if grid |> edgePosition position
         then 0
         else 
-            let leftUntilBlock = left |> Array.rev |> Array.takeWhile (fun tree -> position.Value > tree.Value) 
-            let leftLength = leftUntilBlock |> Array.length
-            let leftLastIsEdge = if leftLength = 0 then true else grid |> edgePosition (leftUntilBlock |> Array.last)
+            let leftUntilBlocked = left |> Array.rev |> Array.takeWhile (fun tree -> position.Value > tree.Value) 
+            let leftLength = leftUntilBlocked |> Array.length
+            let leftLastIsEdge = if leftLength = 0 then true else grid |> edgePosition (leftUntilBlocked |> Array.last)
 
-            let rightUntilBlock = right |> Array.takeWhile (fun tree -> position.Value > tree.Value)
-            let rightLength = rightUntilBlock |> Array.length
-            let rightLastIsEdge = if rightLength = 0 then true else grid |> edgePosition (rightUntilBlock |> Array.last)
+            let rightUntilBlocked = right |> Array.takeWhile (fun tree -> position.Value > tree.Value)
+            let rightLength = rightUntilBlocked |> Array.length
+            let rightLastIsEdge = if rightLength = 0 then true else grid |> edgePosition (rightUntilBlocked |> Array.last)
             
             ((leftLength + (if leftLastIsEdge then 0 else 1)) * (rightLength + (if rightLastIsEdge then 0 else 1)))
 

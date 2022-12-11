@@ -49,17 +49,20 @@ let parse (input: string[]) =
         | CdRootCommand      -> 
             depth <- 0
             None
+
         | CdOutCommand      ->
             let nameSplit = name.Split("/")
             let nameLength = nameSplit |> Array.length
             depth <- depth - 1
             name <- (nameSplit |> Array.take (nameLength - 2) |> join "/") + "/"
             None
+
         | CdInCommand       -> 
             let dirName = (row |> split " ")[2]
             depth <- depth + 1
             name <- name + dirName + "/"
             Some { Depth = depth; Size = None; Name = name }
+
         | _      -> 
             let split = (row |> split " ")
             match split[0] with
