@@ -282,13 +282,6 @@ module Task02 =
         |> Seq.cast<int>
         |> Seq.sum
 
-    let slove input =
-        input
-        |> flattenMoves
-        |> createGrid
-        |> play 
-        |> sumVisitedPositions
-
     let solve input = 
         input
         |> flattenMoves
