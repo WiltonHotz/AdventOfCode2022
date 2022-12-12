@@ -5,7 +5,7 @@ open Common
 
 open System.IO
 
-let path = Path.Combine(__SOURCE_DIRECTORY__, "input.csv")
+let path = Path.Combine(__SOURCE_DIRECTORY__, input)
 
 type Range = {
     Low: int

@@ -7,6 +7,10 @@ let getModuleType = function
 | PropertyGet (_, propertyInfo, _) -> propertyInfo.DeclaringType
 | _ -> failwith "Expression is no property."
 
+let input = "input.csv"
+
+let day05OriginalState = "originalState.csv"
+
 let formatCaller (caller: string) =
     caller.Split("+")
     |> Array.reduce (fun a b -> a + ", " + b)

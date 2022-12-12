@@ -5,8 +5,8 @@ open Common
 
 open System.IO
 
-let path = Path.Combine(__SOURCE_DIRECTORY__, "input.csv")
-let originalState = Path.Combine(__SOURCE_DIRECTORY__, "originalState.csv")
+let path = Path.Combine(__SOURCE_DIRECTORY__, input)
+let originalState = Path.Combine(__SOURCE_DIRECTORY__, day05OriginalState)
 
 type CargoPosition = {
     Cargo: char
