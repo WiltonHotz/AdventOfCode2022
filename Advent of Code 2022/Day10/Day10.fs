@@ -75,7 +75,6 @@ module Task01 =
     let solve input = 
         input
         |> sumState
-
         
     let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
 
@@ -118,15 +117,13 @@ module Task02 =
             printfn ""
         line
             
-
     let solve input = 
         input
         |> flattenMoves
         |> List.fold parseLine (0, 1, List.empty<char>)
         |> print
         |> string
-        
-       
+            
     let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
 
     let data = { Path = path; Solver = solve; Title = executingModule };

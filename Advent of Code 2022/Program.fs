@@ -102,8 +102,8 @@ let main argv =
         //AoC2022_4_2
         //AoC2022_5_1
         //AoC2022_5_2
-        //AoC2022_5_Attempt2_1
-        //AoC2022_5_Attempt2_2
+        AoC2022_5_Attempt2_1
+        AoC2022_5_Attempt2_2
         //AoC2022_6_1
         //AoC2022_6_2
         //AoC2022_7_1
@@ -114,7 +114,7 @@ let main argv =
         //AoC2022_9_2
         //AoC2022_10_1
         //AoC2022_10_2
-        AoC2022_11_1
+        //AoC2022_11_1
         //AoC2022_11_2
         //AoC2022_12_1
         //AoC2022_12_2
@@ -123,7 +123,6 @@ let main argv =
     ]
 
     solveMany tasks
-
 
     0
 

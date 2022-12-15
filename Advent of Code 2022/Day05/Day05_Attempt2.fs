@@ -8,19 +8,6 @@ open System.IO
 let path = Path.Combine(__SOURCE_DIRECTORY__, input)
 let originalState = Path.Combine(__SOURCE_DIRECTORY__, day05OriginalState)
 
-let testCommands =
-    "move 1 from 2 to 1" + "\r\n" +
-    "move 3 from 1 to 3" + "\r\n" +
-    "move 2 from 2 to 1" + "\r\n" +
-    "move 1 from 1 to 2"
-
-let test = 
-    "    [D]    " + 
-    "\r\n" + 
-    "[N] [C]    " + 
-    "\r\n" + 
-    "[Z] [M] [P]"
-
 let transpose numberOfPiles input =
     input
     |> toArray
@@ -34,92 +21,68 @@ let transpose numberOfPiles input =
     |> Array.transpose
     |> Array.map (Array.choose id)
     
-let getOriginalState path =
+let getOriginalState piles path =
     path
     |> File.ReadAllText
-    |> transpose 3
-
-type State = {
-    CurrentState: char[][]
-}
-
-// peek 
+    |> transpose piles
 
 let pop (array: 'T[]) =
     let lastElement = array |> Array.rev |> Array.head
-    let remaining = array |> Array.rev |> Array.tail
+    let remaining = array |> Array.rev |> Array.tail |> Array.rev
     (remaining, Some lastElement)
 
 let push (elem: 'T option) (array: 'T[]) =
     match elem with
-    | Some e    -> array |> Array.append [|e|]
+    | Some e    -> [|e|] |> Array.append array
     | None      -> array
-    
 
-let move source =
-    fun destination ->
+let move numberOfItems source destination =
+    if numberOfItems = 1 then
         let (remainingSource, lastElement) = source |> pop
         let updatedDestination = destination |> push lastElement
         (remainingSource, updatedDestination)
+    else
+        let (remainingSource, elements) = 
+            (source |> Array.rev |> Array.skip numberOfItems |> Array.rev,
+            source |> Array.rev |> Array.take numberOfItems |> Array.rev)
+        let updatedDestination = elements |> Array.append destination
+        (remainingSource, updatedDestination)
 
-let dontMove source =
-    fun destination ->
-        source, destination
-
-let moveMany numberOfItems source destination =
-    let (remainingSource, elements) = (source |> Array.take numberOfItems, source |> Array.skip numberOfItems)
-    let updatedDestination = destination |> Array.append elements
-    (remainingSource, updatedDestination)
-
-let translateCommand (command: string) =
-    match command |> split " " with
-    | [| _; count; _; source; _; destination|] -> (int count, int source, int destination)
-    | _ -> failwith "translation of commands failed"
-
-let updateState (state: char[][]) key =
-    let (count, source, destination) = key
+let updateState (state:char[][]) command =
+    let (numberOfItems, source, destination) = command
+    let newSource, newDestination = move numberOfItems state[source-1] state[destination-1]
     state
-    |> Array.mapi (fun i s -> if i + 1 = source then pop s else (s, None))
-    |> Array.mapi (fun i (d, x) -> if i + 1 = destination then d |> push x else d)
+    |> Array.mapi(fun i a ->
+        if i = source - 1 then newSource
+        elif i = destination - 1 then newDestination
+        else a)
 
-let folder commands (state: char[][]) =
+let parseCommands commands =
     commands
-    |> Array.map (updateState state)
-    |> Array.collect id
+    |> Array.fold updateState (getOriginalState 9 originalState)
+    |> Array.map Array.last
+    |> Seq.ofArray
+    |> join ""
 
-//let updateStateByCommand command (state: State) =
-//    let (count, source, destination) = command
-//    for x in 1..count do
-        
-        
-
-//let foldCommands (state: State) commands =
-//    (state, commands |> Array.map translateCommand)
-//    ||> Array.fold (fun s (count, source, destination) ->
-//        s.CurrentState
-//        |> Array.map)
-        
 
 module Task01 =
 
-    let originalState =        
-        test
-        |> transpose 3
-
-    let commands  =
-        testCommands
-        |> toArray
-        |> Array.map translateCommand
-
-    let slove input = 
-        originalState
-        |> folder commands
-
-
-        // think about find index§
+    let flattenCommand (command: string) =
+        match command |> split " " with
+        | [| _; count; _; source; _; destination|] -> 
+            seq {
+            for x in 1.. int count do
+                (1, int source, int destination)  
+            }
+            |> Array.ofSeq
+        | _ -> failwith "translation of commands failed"
 
     let solve input = 
-        input 
+        input
+        |> toArray
+        |> Array.collect flattenCommand
+        |> parseCommands
+
 
     let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
 
@@ -128,8 +91,16 @@ module Task01 =
 
 module Task02 =
 
+    let translateCommand (command: string) =
+        match command |> split " " with
+        | [| _; count; _; source; _; destination|] -> (int count, int source, int destination)
+        | _ -> failwith "translation of commands failed"
+
     let solve input = 
-        input 
+        input   
+        |> toArray
+        |> Array.map translateCommand
+        |> parseCommands
 
     let rec private executingModule = getModuleType <@ executingModule @> |> string |> formatCaller
 
