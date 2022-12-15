@@ -90,31 +90,31 @@ let solveMany tasks =
 let main argv =
 
     let tasks = [
-        Warmup2021_1_1
-        Warmup2021_1_2
-        AoC2022_1_1
-        AoC2022_1_2
-        AoC2022_2_1
-        AoC2022_2_2
-        AoC2022_3_1
-        AoC2022_3_2        
-        AoC2022_4_1
-        AoC2022_4_2
-        AoC2022_5_1
-        AoC2022_5_2
+        //Warmup2021_1_1
+        //Warmup2021_1_2
+        //AoC2022_1_1
+        //AoC2022_1_2
+        //AoC2022_2_1
+        //AoC2022_2_2
+        //AoC2022_3_1
+        //AoC2022_3_2        
+        //AoC2022_4_1
+        //AoC2022_4_2
+        //AoC2022_5_1
+        //AoC2022_5_2
         //AoC2022_5_Attempt2_1
         //AoC2022_5_Attempt2_2
-        AoC2022_6_1
-        AoC2022_6_2
-        AoC2022_7_1
-        AoC2022_7_2
-        AoC2022_8_1
-        AoC2022_8_2
-        AoC2022_9_1
-        AoC2022_9_2
+        //AoC2022_6_1
+        //AoC2022_6_2
+        //AoC2022_7_1
+        //AoC2022_7_2
+        //AoC2022_8_1
+        //AoC2022_8_2
+        //AoC2022_9_1
+        //AoC2022_9_2
         //AoC2022_10_1
         //AoC2022_10_2
-        //AoC2022_11_1
+        AoC2022_11_1
         //AoC2022_11_2
         //AoC2022_12_1
         //AoC2022_12_2
@@ -123,6 +123,7 @@ let main argv =
     ]
 
     solveMany tasks
+
 
     0
 
